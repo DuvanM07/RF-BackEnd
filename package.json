@@ -1,0 +1,15 @@
+{
+  "name": "restaurant-finder-backend",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch ./src/index.js"
+  },
+  "keywords": [],
+  "author": "Juan Carlos Jiménez Gutiérrez <jcarlosj.dev@gmail.com>",
+  "license": "ISC",
+  "description": "BackEnd: API para Restaurant Finder",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
