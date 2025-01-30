@@ -16,32 +16,37 @@ router.post( '/', function( req, res ) {
     });
 } );
 // http://localhost:<port>/api/products/<product-id>
-router.get( '/', function( req, res ) {
+// req.params.pedro = 7654ftgyhuji
+router.get( '/:id', function( req, res ) {
+    const id = req.params.id;
     res.json({
         ok: true,
-        msg: 'Obtener un producto por ID'
-    })
+        msg: 'Obtener un producto por ID: ' + id
+    });
 } );
 // http://localhost:<port>/api/products/<product-id>
-router.delete( '/', function( req, res ) {
+router.delete( '/:id', function( req, res ) {
+    const id = req.params.id;
     res.json({
         ok: true,
-        msg: 'Elimina un producto por ID'
-    })
+        msg: `Elimina un producto por ID: ${ id }`
+    });
 } );
 // http://localhost:<port>/api/products/<product-id>
-router.put( '/', function( req, res ) {
+router.put( '/:id', function( req, res ) {
+    const id = req.params.id;
     res.json({
         ok: true,
-        msg: 'Actualiza todos los recursos de un producto por ID'
-    })
+        msg: `Actualiza todos los recursos de un producto por ID: ${ id }`
+    });
 } );
 // http://localhost:<port>/api/products/<product-id>
-router.patch( '/', function( req, res ) {
+router.patch( '/:id', function( req, res ) {
+    const id = req.params.id;
     res.json({
         ok: true,
-        msg: 'Actualiza parcialmente los recursos de un producto por ID'
-    })
+        msg: `Actualiza parcialmente los recursos de un producto por ID: ${ id }`
+    });
 } );
 
 
