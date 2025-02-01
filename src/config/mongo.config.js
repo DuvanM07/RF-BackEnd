@@ -29,5 +29,5 @@ function conexionDB () {
 }
 
 
-//module.exports = dbConection;       // Exportando la configuracion
-module.exports = conexionDB;
+module.exports = dbConection;       // Exportando la configuracion
+//module.exports = conexionDB;
