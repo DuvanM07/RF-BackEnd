@@ -1,4 +1,5 @@
 const ProductModel = require("../models/product.model");
+const insertProduct = require("../services/product.service");
 
 function getProducts( req, res ) {
     res.json({
@@ -11,8 +12,7 @@ async function createProduct( req, res ) {
     const inputData = req.body;
 
     try {
-        /** Consulta a la BD (Responsabilidad del Servicio) */
-        const data = await ProductModel.create( inputData );  // Mongoose registra en MongoDB
+        const data = await insertProduct( inputData );
 
         res.json({
             ok: true,
