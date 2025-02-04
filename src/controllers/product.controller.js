@@ -3,12 +3,23 @@ const insertProduct = require("../services/product.service");
 
 async function getProducts( req, res ) {
 
-    const data = await ProductModel.find({});
+    try {
+        const data = await ProductModel.find({});
 
-    res.json({
-        ok: true,
-        data: data
-    });
+        res.json({
+            ok: true,
+            data: data
+        });        
+    } 
+    catch ( error ) {
+        console.error( error );         // Imprime error al Desarrollador
+        // Envia un mensaje de error legible al cliente
+        res.json({
+            ok: false,
+            msg: 'Ha ocurrido una excepcion al obtener todos los datos'
+        });
+    }
+
 }
 
 async function createProduct( req, res ) {
