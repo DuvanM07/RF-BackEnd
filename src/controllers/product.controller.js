@@ -1,10 +1,13 @@
 const ProductModel = require("../models/product.model");
 const insertProduct = require("../services/product.service");
 
-function getProducts( req, res ) {
+async function getProducts( req, res ) {
+
+    const data = await ProductModel.find({});
+
     res.json({
         ok: true,
-        msg: 'Obtiene todos los productos'
+        data: data
     });
 }
 
