@@ -1,10 +1,10 @@
-const ProductModel = require("../models/product.model");
-const insertProduct = require("../services/product.service");
+const { dbInsertProduct, dbGetProducts } = require("../services/product.service");
+
 
 async function getProducts( req, res ) {
 
     try {
-        const data = await ProductModel.find({});
+        const data = await dbGetProducts();
 
         res.json({
             ok: true,
@@ -26,7 +26,7 @@ async function createProduct( req, res ) {
     const inputData = req.body;
 
     try {
-        const data = await insertProduct( inputData );
+        const data = await dbInsertProduct( inputData );
 
         res.json({
             ok: true,
