@@ -5,11 +5,13 @@ const app = express();
 
 
 // Ejecuta la configuracion de Mongoose para Mongo
-//dbConection();      
+dbConection();      
 // conexionDB();       
 
+/** Middleware: Capacidad a Express de aceptar y comprender JSON */
+app.use( express.json() );
 
-/** Endpoints del sitio */
+/** Middleware: Endpoints del sitio */
 // http://localhost:<port>/api/products
 app.use( '/api/products', require( './routes/product.routes.js' ) );
 
