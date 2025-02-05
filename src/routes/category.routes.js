@@ -1,4 +1,5 @@
 const express = require( 'express' );
+const { createCategory } = require('../controllers/category.controller');
 const router = express.Router();
 
 // http://localhost:<port>/api/categories/
@@ -10,12 +11,7 @@ router.get( '/', function( req, res ) {
 });
 
 // http://localhost:<port>/api/categories/
-router.post( '/', function( req, res ) {
-    res.json({
-        ok: true,
-        msg: 'Crea una catetoria'
-    });
-} );
+router.post( '/', createCategory );
 
 // http://localhost:<port>/api/categories/<category-id>
 // req.params.pedro = 7654ftgyhuji
