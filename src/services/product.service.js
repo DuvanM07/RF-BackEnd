@@ -14,9 +14,17 @@ async function dbGetProductById( id ) {
     return await ProductModel.findOne({ _id: id });     // Forma 2: Usando findOne
 }
 
+async function dbDeleteProductById( id ) {
+    return await ProductModel.findByIdAndDelete( id );           // Forma 1: Usando findByIdAndDelete
+    return await ProductModel.findOneAndDelete({ _id: id });     // Forma 2: Usando findOneAndDelete
+}
+
+
+
 
 module.exports = {
     dbInsertProduct,
     dbGetProducts,
-    dbGetProductById
+    dbGetProductById,
+    dbDeleteProductById
 };
