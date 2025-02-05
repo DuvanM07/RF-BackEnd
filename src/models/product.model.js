@@ -24,6 +24,9 @@ const ProductSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     }
+},{
+    timestamps: true,
+    versionKey: false
 });
 
 /** Paso 2: Vinculamos la estructura de datos a una coleccion dando como resultado un Modelo de datos */
