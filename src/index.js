@@ -14,6 +14,8 @@ app.use( express.json() );
 /** Middleware: Endpoints del sitio */
 // http://localhost:<port>/api/products
 app.use( '/api/products', require( './routes/product.routes.js' ) );
+// http://localhost:<port>/api/categories
+app.use( '/api/categories', require( './routes/category.routes.js' ) );
 
 
 /** Lanzar servidor: http://localhost:<port> */
