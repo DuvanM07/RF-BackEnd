@@ -1,4 +1,4 @@
-const { dbInsertProduct, dbGetProducts, dbGetProductById, dbDeleteProductById } = require("../services/product.service");
+const { dbInsertProduct, dbGetProducts, dbGetProductById, dbDeleteProductById, dbUpdateProductById } = require("../services/product.service");
 
 
 async function getProducts( req, res ) {
@@ -96,12 +96,27 @@ function updateProductByIdPut( req, res ) {
     });
 }
 
-function updateProductByIdPatch( req, res ) {
+async function updateProductByIdPatch( req, res ) {
     const id = req.params.id;
-    res.json({
-        ok: true,
-        msg: `Actualiza parcialmente los recursos de un producto por ID: ${ id }`
-    });
+    const inputData = req.body;
+    
+    try {
+        const data = await dbUpdateProductById( id, inputData );
+
+        res.json({
+            ok: true,
+            data: data
+        });
+    } 
+    catch ( error ) {
+        console.error( error );       // Imprime error al Desarrollador
+        // Envia un mensaje de error legible al cliente
+        res.json({                  
+            ok: false,
+            msg: 'Ha ocurrido una excepcion al actualizar los datos por ID'
+        });
+    }
+
 }
 
 // module.exports = getProducts;  // Export Default

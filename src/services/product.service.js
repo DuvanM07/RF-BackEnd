@@ -19,6 +19,22 @@ async function dbDeleteProductById( id ) {
     return await ProductModel.findOneAndDelete({ _id: id });     // Forma 2: Usando findOneAndDelete
 }
 
+async function dbUpdateProductById( id, newProduct ) {
+    // Forma 1: Usando findByIdAndUpdate
+    return await ProductModel.findByIdAndUpdate( 
+        id,                 // id del documento que se va a actualizar
+        newProduct,         // Objeto con los datos a actualizar del documento
+        { new: true }       // Retornar los nuevos cambios realizados
+    );
+    
+    // Forma 2: Usando findOneAndUpdate
+    return await ProductModel.findOneAndUpdate(
+        { _id: id },        // Objeto de consulta con el ID del documento que se va a actualizar
+        newProduct,         // Objeto con los datos a actualizar del documento
+        { new: true }       // Retornar los nuevos cambios realizados
+    );
+}
+
 
 
 
@@ -26,5 +42,6 @@ module.exports = {
     dbInsertProduct,
     dbGetProducts,
     dbGetProductById,
-    dbDeleteProductById
+    dbDeleteProductById,
+    dbUpdateProductById
 };
