@@ -1,4 +1,4 @@
-const { dbInsertProduct, dbGetProducts } = require("../services/product.service");
+const { dbInsertProduct, dbGetProducts, dbGetProductById } = require("../services/product.service");
 
 
 async function getProducts( req, res ) {
@@ -44,12 +44,26 @@ async function createProduct( req, res ) {
 
 }
 
-function getProductById( req, res ) {
+async function getProductById( req, res ) {
     const id = req.params.id;
-    res.json({
-        ok: true,
-        msg: 'Obtener un producto por ID: ' + id
-    });
+
+    try {
+        const data = await dbGetProductById( id );
+
+        res.json({
+            ok: true,
+            data: data
+        });
+    } 
+    catch ( error ) {
+        console.error( error );       // Imprime error al Desarrollador
+        // Envia un mensaje de error legible al cliente
+        res.json({                  
+            ok: false,
+            msg: 'Ha ocurrido una excepcion al obtener los datos por ID'
+        });
+    }
+    
 } 
 
 function deleteProductById( req, res ) {
