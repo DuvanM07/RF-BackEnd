@@ -1,5 +1,5 @@
 const express = require( 'express' );
-const { createCategory, getCategories } = require('../controllers/category.controller');
+const { createCategory, getCategories, getCategoryById } = require('../controllers/category.controller');
 const router = express.Router();
 
 // http://localhost:<port>/api/categories/
@@ -10,12 +10,7 @@ router.post( '/', createCategory );
 
 // http://localhost:<port>/api/categories/<category-id>
 // req.params.pedro = 7654ftgyhuji
-router.get( '/:id', function( req, res ) {
-    res.json({
-        ok: true,
-        msg: 'Obtener categoria por ID'
-    });
-} );
+router.get( '/:id', getCategoryById );
 
 // http://localhost:<port>/api/categories/<category-id>
 router.delete( '/:id', function( req, res ) {
