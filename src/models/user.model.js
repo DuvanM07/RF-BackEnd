@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
 
 /** Paso 2: Vinculamos la estructura de datos a una coleccion dando como resultado un Modelo de datos */
 const UserModel = mongoose.model(
-    'categories',       // Nombre de la coleccion donde se agruparan los documentos
+    'users',            // Nombre de la coleccion donde se agruparan los documentos
     UserSchema          // Estructura de datos de la Entidad
 );
 

@@ -16,6 +16,8 @@ app.use( express.json() );
 app.use( '/api/products', require( './routes/product.routes.js' ) );
 // http://localhost:<port>/api/categories
 app.use( '/api/categories', require( './routes/category.routes.js' ) );
+// http://localhost:<port>/api/users
+app.use( '/api/users', require( './routes/user.routes.js' ) );
 
 
 /** Lanzar servidor: http://localhost:<port> */
