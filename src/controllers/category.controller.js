@@ -1,10 +1,11 @@
 const CategoryModel = require("../models/category.model");
+const { dbInsertCategory } = require("../services/category.service");
 
 async function createCategory( req, res ) {
     const inputData = req.body;
 
     try {
-        const data = await CategoryModel.create( inputData );
+        const data = await dbInsertCategory( inputData );
 
         res.json({
             ok: true,
