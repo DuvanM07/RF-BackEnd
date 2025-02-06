@@ -1,5 +1,5 @@
 const CategoryModel = require("../models/category.model");
-const { dbInsertCategory, dbGetCategories, dbGetCategoryById } = require("../services/category.service");
+const { dbInsertCategory, dbGetCategories, dbGetCategoryById, dbDeleteCategoryById } = require("../services/category.service");
 
 async function createCategory( req, res ) {
     const inputData = req.body;
@@ -66,9 +66,32 @@ async function getCategoryById( req, res ) {
     
 } 
 
+async function deleteCategoryById( req, res ) {
+    const id = req.params.id;
+    
+    try {
+        const data = await dbDeleteCategoryById( id );
+
+        res.json({
+            ok: true,
+            data: data
+        });
+    } 
+    catch ( error ) {
+        console.error( error );       // Imprime error al Desarrollador
+        // Envia un mensaje de error legible al cliente
+        res.json({                  
+            ok: false,
+            msg: 'Ha ocurrido una excepcion al eliminar una categoria por ID'
+        });
+    }
+
+}
+
 
 module.exports = {
     createCategory,
     getCategories,
-    getCategoryById
+    getCategoryById,
+    deleteCategoryById
 }

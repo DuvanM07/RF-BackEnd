@@ -13,8 +13,14 @@ async function dbGetCategoryById( id ) {
     return await CategoryModel.findOne({ _id: id });     // Forma 2: Usando findOne
 }
 
+async function dbDeleteCategoryById( id ) {
+    return await CategoryModel.findByIdAndDelete( id );           // Forma 1: Usando findByIdAndDelete
+    return await CategoryModel.findOneAndDelete({ _id: id });     // Forma 2: Usando findOneAndDelete
+}
+
 module.exports = {
     dbInsertCategory,
     dbGetCategories,
-    dbGetCategoryById
+    dbGetCategoryById,
+    dbDeleteCategoryById
 }
