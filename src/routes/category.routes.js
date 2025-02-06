@@ -1,6 +1,8 @@
 const express = require( 'express' );
-const { createCategory, getCategories, getCategoryById, deleteCategoryById } = require('../controllers/category.controller');
+const { createCategory, getCategories, getCategoryById, deleteCategoryById, updateCategoryById } = require('../controllers/category.controller');
+
 const router = express.Router();
+
 
 // http://localhost:<port>/api/categories/
 router.get( '/', getCategories );
@@ -16,12 +18,7 @@ router.get( '/:id', getCategoryById );
 router.delete( '/:id', deleteCategoryById );
 
 // http://localhost:<port>/api/categories/<category-id>
-router.patch( '/:id', function( req, res ) {
-    res.json({
-        ok: true,
-        msg: 'Actualiza catetoria por ID'
-    });
-} );
+router.patch( '/:id', updateCategoryById );
 
 
 module.exports = router;
