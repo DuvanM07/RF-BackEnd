@@ -18,11 +18,16 @@ const ProductSchema = new mongoose.Schema({
         type: String
     },
     category: {
-        type: String
+        type: mongoose.Schema.ObjectId,
+        ref: 'categories'
     },
     state: {
         type: Boolean,
         default: true
+    },
+    userId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'users'
     }
 },{
     timestamps: true,
