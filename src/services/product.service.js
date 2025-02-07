@@ -6,7 +6,7 @@ async function dbInsertProduct( newProduct ) {
 }
 
 async function dbGetProducts() {
-    return await ProductModel.find({});     // Mongoose obtiene todos los datos en MongoDB
+    return await ProductModel.find({}).populate(['category','userId']);     // Mongoose obtiene todos los datos en MongoDB
 }
 
 async function dbGetProductById( id ) {
