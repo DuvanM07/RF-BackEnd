@@ -8,12 +8,18 @@ const UserSchema = new mongoose.Schema({
     },
     username: {
         type: String,
+        lowercase: true,
         required: true
     },
     password: {
         type: String,
         required: true
     },
+    roles: {
+        type: String,
+        enum: [ 'registered', 'moderator', 'admin' ],
+        default: 'registered'
+    }
 },{
     timestamps: true,
     versionKey: false
