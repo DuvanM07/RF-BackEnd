@@ -5,12 +5,16 @@ async function dbInsertUser( newUser ) {
 }
 
 async function dbGetUsers() {
-    return await UserModel.find({});     // Mongoose obtiene todos los datos en MongoDB
+    // Mongoose obtiene todos los datos en MongoDB
+    return await UserModel.find(
+        {},
+        { password: 0, createdAt: 0, updatedAt: 0 }
+    );
 }
 
 async function dbGetUserById( id ) {
-    return await UserModel.findById( id );           // Forma 1: Usando findById
-    return await UserModel.findOne({ _id: id });     // Forma 2: Usando findOne
+    return await UserModel.findById( id, { password: 0, createdAt: 0, updatedAt: 0, _id: 0 } );           // Forma 1: Usando findById
+    return await UserModel.findOne({ _id: id }, { password: 0, createdAt: 0, updatedAt: 0, _id: 0 });     // Forma 2: Usando findOne
 }
 
 async function dbDeleteUserById( id ) {
