@@ -13,6 +13,18 @@ async function createCategory( req, res ) {
         });    
     } 
     catch ( error ) {
+        if ( error.name === 'ValidationError' ) {
+            const errors = {};
+            
+            /** Itera errores de validaciones implementadas en las propiedades del modelo */
+            for ( const key in error.errors ) {
+                errors[ key ] = error.errors[ key ].message;
+            }
+
+            console.error( error );                         // Imprime error al Desarrollador
+            return res.status( 400 ).json({ errors });      // Envia un mensaje de error legible al cliente
+        } 
+
         console.error( error );       // Imprime error al Desarrollador
         // Envia un mensaje de error legible al cliente
         res.json({                  
