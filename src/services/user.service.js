@@ -51,11 +51,16 @@ async function dbUpdateUserById( id, newUser ) {
     ).select( '-password' );
 }
 
+const dbGetUserByUsername = async ( email ) => {
+    return await UserModel.findOne({ username: email });
+}
+
 
 module.exports = {
     dbInsertUser,
     dbGetUsers,
     dbGetUserById,
     dbDeleteUserById,
-    dbUpdateUserById
+    dbUpdateUserById,
+    dbGetUserByUsername
 }

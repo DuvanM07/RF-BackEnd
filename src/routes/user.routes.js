@@ -1,6 +1,7 @@
 const express = require( 'express' );
-const { getUsers, createUser, getUserById, deleteUserById, updateUserById } = require('../controllers/user.controller');
 
+const { getUsers, createUser, getUserById, deleteUserById, updateUserById } = require('../controllers/user.controller');
+const validateUserExists = require('../middlewares/validate-user-exists.middleware');
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ const router = express.Router();
 router.get( '/', getUsers );
 
 // http://localhost:<port>/api/users/
-router.post( '/', createUser );
+router.post( '/', validateUserExists, createUser );
 
 // http://localhost:<port>/api/users/<category-id>
 // req.params.pedro = 7654ftgyhuji
