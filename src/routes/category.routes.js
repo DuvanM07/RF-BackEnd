@@ -1,5 +1,7 @@
 const express = require( 'express' );
+
 const { createCategory, getCategories, getCategoryById, deleteCategoryById, updateCategoryById } = require('../controllers/category.controller');
+const validateId = require('../middlewares/validate-id.middleware');
 
 const router = express.Router();
 
@@ -12,13 +14,13 @@ router.post( '/', createCategory );
 
 // http://localhost:<port>/api/categories/<category-id>
 // req.params.pedro = 7654ftgyhuji
-router.get( '/:id', getCategoryById );
+router.get( '/:id', validateId, getCategoryById );
 
 // http://localhost:<port>/api/categories/<category-id>
-router.delete( '/:id', deleteCategoryById );
+router.delete( '/:id', validateId, deleteCategoryById );
 
 // http://localhost:<port>/api/categories/<category-id>
-router.patch( '/:id', updateCategoryById );
+router.patch( '/:id', validateId, updateCategoryById );
 
 
 module.exports = router;
