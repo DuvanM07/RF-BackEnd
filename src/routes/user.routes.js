@@ -1,7 +1,8 @@
 const express = require( 'express' );
 
 const { getUsers, createUser, getUserById, deleteUserById, updateUserById } = require('../controllers/user.controller');
-const validateUserExists = require('../middlewares/validate-user-exists.middleware');
+const validateId = require('../middlewares/validate-id.middleware');
+const { validateUserExistsByUserName, validateUserDoesNotExistsById } = require('../middlewares/validate-user-exists.middleware');
 
 const router = express.Router();
 
@@ -10,17 +11,33 @@ const router = express.Router();
 router.get( '/', getUsers );
 
 // http://localhost:<port>/api/users/
-router.post( '/', validateUserExists, createUser );
+router.post( 
+    '/', 
+    validateUserExistsByUserName, 
+    createUser 
+);
 
 // http://localhost:<port>/api/users/<category-id>
 // req.params.pedro = 7654ftgyhuji
-router.get( '/:id', getUserById );
+router.get( 
+    '/:id', 
+    [ validateId, validateUserDoesNotExistsById ], 
+    getUserById 
+);
 
 // http://localhost:<port>/api/users/<category-id>
-router.delete( '/:id', deleteUserById );
+router.delete( 
+    '/:id', 
+    [ validateId, validateUserDoesNotExistsById ], 
+    deleteUserById 
+);
 
 // http://localhost:<port>/api/users/<category-id>
-router.patch( '/:id', updateUserById );
+router.patch( 
+    '/:id', 
+    [ validateId, validateUserDoesNotExistsById ], 
+    updateUserById 
+);
 
 
 module.exports = router;
