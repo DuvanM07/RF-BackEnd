@@ -1,7 +1,29 @@
+const encryptedPassword = require("../helpers/bcrypt.helper");
 const UserModel = require("../models/user.model");
 
 async function dbInsertUser( newUser ) {
-    return await UserModel.create( newUser );
+    // return await UserModel.create( newUser );  // Esto Registra en la base de datos inmediatamente
+
+    // Paso 1: Prepara el objeto BJSON para registrar en DB
+    const dbUser = new UserModel( newUser );
+    console.log( 'dbUser', dbUser );
+
+    // Paso 2: Encripta y actualiza password en su respectiva propiedad
+    dbUser.password = encryptedPassword( dbUser.password );
+    
+    // Paso 3: Registra el objecto BJSON con los cambios hechos
+    await dbUser.save();      
+
+    // Paso 4: Convierte un BJON en un Objeto JavaScript
+    const objsUser = dbUser.toObject(); // Devuelve todas las propiedades BJSON
+
+    // Paso 5: Elimina las propiedades del Objeto JavaScript
+    delete objsUser.password;
+    delete objsUser.createdAt;
+    delete objsUser.updatedAt;
+
+    // Paso 6: Retorno al cliente el Objeto JavaScript con los campos eliminados
+    return objsUser;
 }
 
 async function dbGetUsers() {
