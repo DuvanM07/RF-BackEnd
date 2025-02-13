@@ -18,5 +18,15 @@ function encryptedPassword ( pass ) {
     return hashPassword;        // Retorna password encriptado
 }
 
+const verifyEncriptedPassword = ( pass, hashPass ) => {
+    return bcrypt.compareSync( 
+        pass,       // Password original del usuario
+        hashPass    // Cadena aleatoria
+    );
+}
 
-module.exports = encryptedPassword;
+
+module.exports = {
+    encryptedPassword,
+    verifyEncriptedPassword
+}
