@@ -1,3 +1,4 @@
+const verifyProperties = require("../helpers/verify-properies.helper");
 const CategoryModel = require("../models/category.model");
 const { dbInsertCategory, dbGetCategories, dbGetCategoryById, dbDeleteCategoryById, dbUpdateCategoryById } = require("../services/category.service");
 
@@ -13,17 +14,17 @@ async function createCategory( req, res ) {
         });    
     } 
     catch ( error ) {
-        if ( error.name === 'ValidationError' ) {
-            const errors = {};
-            
-            /** Itera errores de validaciones implementadas en las propiedades del modelo */
-            for ( const key in error.errors ) {
-                errors[ key ] = error.errors[ key ].message;
-            }
+        /** Validamos si existen los errores de validacion */
+        if( error?.name === 'ValidationError' ) {
+            const errors = verifyProperties( error );       // Extrae los mensajes de error por cada propiedad
 
-            console.error( error );                         // Imprime error al Desarrollador
-            return res.status( 400 ).json({ errors });      // Envia un mensaje de error legible al cliente
-        } 
+            console.error( errors );           // Imprime error al Desarrollador
+            // Envia un mensaje de error legible al cliente
+            return res.json({
+                ok: false,
+                errors
+            });
+        }
 
         console.error( error );       // Imprime error al Desarrollador
         // Envia un mensaje de error legible al cliente

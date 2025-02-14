@@ -4,7 +4,7 @@ const mongoose = require( 'mongoose' );
 const CategorySchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [ true, 'El nombre es requerido' ],
+        required: [ true, 'El nombre de la categoria es obligatorio' ],
         minlength: [ 3, 'El nombre debe tener al menos 3 caracteres' ],
         trim: true
     },

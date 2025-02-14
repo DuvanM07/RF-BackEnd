@@ -4,16 +4,19 @@ const mongoose = require( 'mongoose' );
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        trim: true,
+        required: [ true, 'EL nombre del usuario es obligatorio' ]
     },
     username: {
         type: String,
-        lowercase: true,
-        required: true
+        trim: true,
+        lowercase: [ true, 'El username es un correo en minusculas' ],
+        required: [ true, 'El username es obligatorio' ]
     },
     password: {
         type: String,
-        required: true
+        trim: true,
+        required: [ true, 'El password es obligatorio' ]
     },
     role: {
         type: String,

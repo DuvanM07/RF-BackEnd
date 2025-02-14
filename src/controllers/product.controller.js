@@ -1,3 +1,4 @@
+const verifyProperties = require("../helpers/verify-properies.helper");
 const { dbInsertProduct, dbGetProducts, dbGetProductById, dbDeleteProductById, dbUpdateProductById } = require("../services/product.service");
 
 
@@ -34,11 +35,23 @@ async function createProduct( req, res ) {
         });    
     } 
     catch ( error ) {
+        /** Validamos si existen los errores de validacion */
+        if( error?.name === 'ValidationError' ) {
+            const errors = verifyProperties( error );       // Extrae los mensajes de error por cada propiedad
+
+            console.error( errors );           // Imprime error al Desarrollador
+            // Envia un mensaje de error legible al cliente
+            return res.json({
+                ok: false,
+                errors
+            });
+        }
+
         console.error( error );       // Imprime error al Desarrollador
         // Envia un mensaje de error legible al cliente
         res.json({                  
             ok: false,
-            msg: 'Ha ocurrido una excepcion al registrar los datos'
+            errors
         });
     }
 

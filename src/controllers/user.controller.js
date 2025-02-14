@@ -1,3 +1,4 @@
+const verifyProperties = require("../helpers/verify-properies.helper");
 const { dbGetUsers, dbInsertUser, dbGetUserById, dbDeleteUserById, dbUpdateUserById } = require("../services/user.service");
 
 
@@ -13,11 +14,24 @@ async function createUser( req, res ) {
         });    
     } 
     catch ( error ) {
+        console.error( error.errors );
+        /** Validamos si existen los errores de validacion */
+        if( error?.name === 'ValidationError' ) {
+            const errors = verifyProperties( error );       // Extrae los mensajes de error por cada propiedad
+
+            console.error( errors );           // Imprime error al Desarrollador
+            // Envia un mensaje de error legible al cliente
+            return res.json({
+                ok: false,
+                errors
+            });
+        }
+
         console.error( error );       // Imprime error al Desarrollador
         // Envia un mensaje de error legible al cliente
         res.json({                  
             ok: false,
-            msg: 'Ha ocurrido una excepcion al registrar un usuario'
+            msg: 'Ha ocurrido una excepcion al registrar un usuario',
         });
     }
 

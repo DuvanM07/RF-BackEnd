@@ -4,22 +4,26 @@ const mongoose = require( 'mongoose' );
 const ProductSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        trim: true,
+        required: [ true, 'El nombre del producto es obligatorio' ]
     },
     description: {
-        type: String
+        type: String,
+        trim: true
     },
     price: {
         type: Number,
-        min: 0,
+        min: [ 0, 'El precio minimo para el producto es 0' ],
         default: 0
     },
     urlImage: {
-        type: String
+        type: String,
+        trim: true
     },
     category: {
         type: mongoose.Schema.ObjectId,
-        ref: 'categories'
+        ref: 'categories',
+        required: [ true, 'El ID de la categoria es obligatoria' ]
     },
     state: {
         type: Boolean,
@@ -27,7 +31,8 @@ const ProductSchema = new mongoose.Schema({
     },
     userId: {
         type: mongoose.Schema.ObjectId,
-        ref: 'users'
+        ref: 'users',
+        required: [ true, 'El ID del usuario es obligatorio' ]
     }
 },{
     timestamps: true,
